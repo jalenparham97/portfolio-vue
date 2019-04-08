@@ -58,7 +58,7 @@
           <div class="project border">
             <img src="../assets/img/newscycle.jpg" alt="NewsCycle, get your news on a cycle">
             <h3 class="title">NewsCycle</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia, ipsum id! Laborum similique veritatis eligendi.</p>
+            <p>A news application where users can Login and get up to date news, save articles to their personal feed, comment and like on news articles, and search for their favorite news outlets.</p>
             <div class="card-action-btns">
               <button class="card-action-btn ripple">Source Code</button>
               <button class="card-action-btn ripple">Visit Site</button>
@@ -94,7 +94,8 @@
             <div class="form">
               <input type="text" class="form-control" placeholder="Name">
               <input type="text" class="form-control" placeholder="Email">
-              <textarea type="text" class="form-control" placeholder="Message"></textarea>
+              <textarea type="text" rows="3" class="form-control" placeholder="Message"></textarea>
+              <button class="form-btn ripple" type="submit">Send</button>
             </div>
           </form>
         </div>
@@ -218,7 +219,7 @@ main {
 /* Skills Section */
 .skills {
   padding: 7em 2em;
-  margin: 50px 0px 80px 0px;
+  margin: 50px 0px 50px 0px;
 }
 
 .skills h1,
@@ -355,7 +356,7 @@ main {
 
 /* Contact Section */
 .contact {
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 .contact-container {
@@ -379,16 +380,37 @@ main {
   flex-direction: column;
 }
 
+.form-title {
+  font-size: 2rem;
+  color: #4c4981;
+}
+
 .form-control {
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #4c4981;
   border-radius: 5px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .form-control:first-child {
   margin-top: 20px;
+}
+
+.form-btn {
+  padding: 6px;
+  background: #4c4981;
+  color: #fff;
+  border: 1px solid #4c4981;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  transition: .3s;
+  cursor: pointer;
+}
+
+.form-btn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* Media Queries */
@@ -471,6 +493,16 @@ main {
   }
 }
 
+@media only screen and (max-width: 1175px) {
+  .contact-img {
+    width: 500px;
+  }
+
+  .contact-form {
+    width: 400px;
+  }
+}
+
 @media only screen and (max-width: 1050px) {
   .hero {
     display: flex;
@@ -486,6 +518,9 @@ main {
     width: 500px;
     height: 500px;
   }
+
+  /* Contact Section */
+
 }
 
 @media only screen and (max-width: 999px) {
@@ -513,6 +548,25 @@ main {
   /* Work Section */
   .work-container {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .contact {
+    margin-top: 150px;
+  }
+
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-img {
+    width: 400px;
+    margin-bottom: 40px;
+  }
+
+  .contact-form {
+    width: 80%;
   }
 }
 
