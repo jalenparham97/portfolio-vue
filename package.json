@@ -4,11 +4,15 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "lambda-serve": "netlify-lambda serve functions",
+    "lambda-build": "netlify-lambda build functions"
   },
   "dependencies": {
+    "@sendgrid/mail": "^6.3.1",
     "core-js": "^2.6.5",
     "moment": "^2.24.0",
+    "netlify-lambda": "^1.4.3",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuesax": "^3.8.59"
