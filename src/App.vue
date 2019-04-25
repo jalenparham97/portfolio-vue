@@ -27,6 +27,10 @@ html {
   font-family: "Roboto", sans-serif;
 }
 
+.tc {
+  text-align: center;
+}
+
 /* Button Ripple Effect */
 .ripple {
   position: relative;

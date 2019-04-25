@@ -88,7 +88,7 @@
 
       <section class="contact">
         <div class="contact-container">
-          <img src="../assets/img/calling.svg" alt="Let's get in touch" class="contact-img">
+          <img src="../assets/img/email.svg" alt="Let's get in touch" class="contact-img">
           <form action class="contact-form">
             <h1 class="form-title">Let's Get In Touch</h1>
             <div class="form">
@@ -404,7 +404,7 @@ main {
   border: 1px solid #4c4981;
   font-size: 1.2rem;
   border-radius: 50px;
-  transition: .3s;
+  transition: 0.3s;
   cursor: pointer;
 }
 
@@ -470,6 +470,15 @@ main {
     font-size: 1.5rem;
     line-height: 1.5;
   }
+
+  .skills-container {
+    width: 1500px;
+    margin: 40px auto auto auto;
+  }
+
+  .work-container {
+    width: 1500px;
+  }
 }
 
 @media only screen and (max-width: 1320px) {
@@ -520,7 +529,6 @@ main {
   }
 
   /* Contact Section */
-
 }
 
 @media only screen and (max-width: 999px) {
