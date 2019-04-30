@@ -1,6 +1,24 @@
 <template>
   <div class="contact">
-    <h1>Contact</h1>
+    <h1>Dont be a stranger, Just say hello</h1>
+    <p>Feel free to get in touch with me. I am always open to discussing new projects, creative ideas or opportunities to be a part of.</p>
+    <div class="contact-container">
+      <div class="contact-description">
+        <img src="../assets/img/calling.svg" alt="Contact Me">
+      </div>
+
+      <div class="form">
+        <form action class="contact-form">
+          <h1 class="form-title">Let's Get In Touch</h1>
+          <div class="form">
+            <input type="text" class="form-control" placeholder="Name">
+            <input type="text" class="form-control" placeholder="Email">
+            <textarea type="text" rows="3" class="form-control" placeholder="Message"></textarea>
+            <button class="form-btn ripple" type="submit">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -8,5 +26,66 @@
 export default {};
 </script>
 
-<style>
+<style lang="scss" scoped>
+.contact-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 100px auto;
+}
+
+.contact-description img {
+  width: 700px;
+}
+
+.contact-form {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-title {
+  font-size: 2rem;
+  color: #4c4981;
+}
+
+.form-control {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #4c4981;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+.form-control:first-child {
+  margin-top: 20px;
+}
+
+.form-btn {
+  padding: 6px;
+  background: #4c4981;
+  color: #fff;
+  border: 1px solid #4c4981;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.form-btn:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+@media only screen and (min-width: 1482px) {
+  .contact-container {
+    width: 1400px;
+  }
+}
 </style>
+
