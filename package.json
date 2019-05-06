@@ -9,7 +9,6 @@
     "lambda-build": "netlify-lambda build functions"
   },
   "dependencies": {
-    "@sendgrid/mail": "^6.3.1",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "moment": "^2.24.0",

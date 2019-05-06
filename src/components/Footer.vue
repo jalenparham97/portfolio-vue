@@ -17,10 +17,7 @@
       </div>
 
       <div class="copywrite">
-        <p>
-          Jalen Parham
-          <span>&copy;</span> 2018
-        </p>
+        <p>Jalen Parham &copy; 2019</p>
       </div>
     </div>
   </footer>

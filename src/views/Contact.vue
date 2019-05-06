@@ -1,7 +1,9 @@
 <template>
   <div class="contact">
-    <h1>Dont be a stranger, Just say hello</h1>
-    <p>Feel free to get in touch with me. I am always open to discussing new projects, creative ideas or opportunities to be a part of.</p>
+    <h1 class="title">Dont be a stranger, Just say hello</h1>
+    <p
+      class="subtitle"
+    >Feel free to get in touch with me. I am always open to discussing new projects, creative ideas or opportunities to be a part of.</p>
     <div class="contact-container">
       <div class="contact-description">
         <img src="../assets/img/calling.svg" alt="Contact Me">
@@ -32,6 +34,24 @@ export default {};
   align-items: center;
   justify-content: space-between;
   margin: 100px auto;
+}
+
+.title,
+.subtitle {
+  text-align: center;
+  color: #4c4981;
+}
+
+.title {
+  margin-top: 70px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 1.3rem;
+  width: 550px;
+  margin: 0 auto;
+  line-height: 1.5;
 }
 
 .contact-description img {
@@ -85,6 +105,68 @@ export default {};
 @media only screen and (min-width: 1482px) {
   .contact-container {
     width: 1400px;
+  }
+}
+
+@media only screen and (max-width: 1482px) {
+  .contact-container {
+    justify-content: space-around;
+  }
+
+  .contact-description img {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .contact-form {
+    width: 400px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .contact-container {
+    flex-direction: column;
+  }
+
+  .contact-description {
+    margin-bottom: 70px;
+    text-align: center;
+  }
+
+  .form {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+
+  .form-title {
+    text-align: center;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .title,
+  .subtitle {
+    width: 90%;
+  }
+
+  .title {
+    margin: 70px auto 20px auto;
+    line-height: 1.5;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .contact-description img {
+    width: 90%;
+  }
+
+  .form {
+    width: 90%;
   }
 }
 </style>

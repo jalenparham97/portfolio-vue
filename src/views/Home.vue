@@ -6,8 +6,8 @@
           <h1>Full Stack Web Developer</h1>
           <h3>I create Web Applications using the latest technologies the web has to offer.</h3>
           <div class="hero-actions">
-            <button class="action-btn ripple">Hire Me</button>
-            <button class="action-btn ripple">Contact</button>
+            <router-link class="action-btn ripple" to="/work">My Work</router-link>
+            <router-link class="action-btn ripple" to="/contact">Contact</router-link>
           </div>
         </div>
 
@@ -51,7 +51,7 @@
         <h1>My Work</h1>
         <div class="work-contact">
           <h2>Like what you see?</h2>
-          <button class="ripple">Let's Talk</button>
+          <router-link class="ripple work-contact-btn" to="/contact">Let's Talk</router-link>
         </div>
 
         <div class="work-container">
@@ -61,7 +61,11 @@
             <p>A news application where users can Login and get up to date news, save articles to their personal feed, comment and like on news articles, and search for their favorite news outlets.</p>
             <div class="card-action-btns">
               <button class="card-action-btn ripple">Source Code</button>
-              <button class="card-action-btn ripple">Visit Site</button>
+              <a
+                class="card-action-btn ripple"
+                href="https://newscycle.netlify.com"
+                target="_blank"
+              >Visit Site</a>
             </div>
           </div>
           <div class="project border">
@@ -276,7 +280,7 @@ main {
   margin: 0px 10px;
 }
 
-.work-contact button {
+.work-contact-btn {
   margin: 0px 10px;
   font-size: 1.2rem;
   color: #fff;
@@ -289,7 +293,7 @@ main {
   outline: none;
 }
 
-.work-contact button:hover {
+.work-contact-btn:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
