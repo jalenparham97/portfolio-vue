@@ -1,21 +1,43 @@
-const sgMail = require('@sendgrid/mail')
-const SENDGRID_API_KEY =
-  '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'
+const SparkPost = require('sparkpost')
+const client = new SparkPost()
 
 exports.handler = function(event, context, callback) {
-  const { name, email, message } = event.body
+  const { name } = event.body
 
-  sgMail.setApiKey(SENDGRID_API_KEY)
+  const sendEmail = () => {
+    // client.transmissions
+    //   .send({
+    //     options: {
+    //       sandbox: false
+    //     },
+    //     content: {
+    //       from: 'jalenparham@mail.jalenparham.com',
+    //       subject: 'Hello, World!',
+    //       html: `<html>
+    //           <body>
+    //             <p>Testing SparkPost - the world's most awesomest email service!</p>
+    //             <p>${mail.name}</p>
+    //             <p>${mail.email}</p>
+    //             <p>${mail.message}</p>
+    //           </body>
+    //         </html>`
+    //     },
+    //     recipients: [{ address: 'jalenparham97@gmail.com' }]
+    //   })
+    //   .then(data => {
+    //     console.log('Woohoo! You just sent your first mailing!')
+    //     console.log(data)
+    //     console.log(mail)
+    //     send('Message Sent')
+    //   })
+    //   .catch(err => {
+    //     console.log('Whoops! Something went wrong')
+    //     console.log(err)
+    //     send(err)
+    //   })
 
-  const msg = {
-    to: 'jalenparham97@gmail.com',
-    from: email,
-    subject: 'Sending with SendGrid is Fun',
-    text: 'and easy to do anywhere, even with Node.js',
-    html: `<ul>
-       <li>Name: ${name}</li>
-       <li>Message: ${message}</li>
-    </ul>`
+    send(event.body)
+    console.log(name)
   }
 
   const send = body => {
@@ -25,12 +47,7 @@ exports.handler = function(event, context, callback) {
     })
   }
 
-  const sendEmail = () => {}
-
   if (event.httpMethod === 'POST') {
-    // sgMail.send(msg).then(() => send('Message Sent')).catch(err => send(err))
     sendEmail()
-      .then(() => send('Message Sent'))
-      .catch(err => send(err))
   }
 }
