@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <h1 class="about-me-title">About Me</h1>
     <div class="about-img">
       <img class="about-me" src="../assets/img/aboutme.svg" alt="About me">
     </div>
@@ -47,6 +48,13 @@ export default {
 </script>
 
 <style scoped>
+.about-me-title {
+  text-align: center;
+  margin-bottom: -100px;
+  margin-top: 70px;
+  color: #4c4981;
+}
+
 .about-img {
   width: 600px;
   margin: 70px auto auto auto;

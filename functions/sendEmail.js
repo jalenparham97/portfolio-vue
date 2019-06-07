@@ -1,7 +1,7 @@
-// const SparkPost = require('sparkpost')
-// const client = new SparkPost()
+const SparkPost = require('sparkpost')
+const client = new SparkPost('590366d1b42155cce4d68bcbb39bacd41be8ecab')
 
-exports.handler = function(event, context, callback) {
+exports.handler = (event, context, callback) => {
   const { name, email, message } = JSON.parse(event.body)
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -11,49 +11,42 @@ exports.handler = function(event, context, callback) {
   const send = body => {
     callback(null, {
       statusCode: 200,
-      body: JSON.stringify(true),
+      body: JSON.stringify(body),
       headers
     })
   }
-  send()
 
-  // const sendEmail = () => {
-  //   client.transmissions
-  //     .send({
-  //       options: {
-  //         sandbox: false
-  //       },
-  //       content: {
-  //         from: 'jalenparham@mail.jalenparham.com',
-  //         subject: 'Hello, World!',
-  //         html: `<html>
-  //             <body>
-  //               <p>Testing SparkPost - the world's most awesomest email service!</p>
-  //               <p>${mail.name}</p>
-  //               <p>${mail.email}</p>
-  //               <p>${mail.message}</p>
-  //             </body>
-  //           </html>`
-  //       },
-  //       recipients: [{ address: 'jalenparham97@gmail.com' }]
-  //     })
-  //     .then(data => {
-  //       console.log('Woohoo! You just sent your first mailing!')
-  //       console.log(data)
-  //       console.log(mail)
-  //       send('Message Sent')
-  //     })
-  //     .catch(err => {
-  //       console.log('Whoops! Something went wrong')
-  //       console.log(err)
-  //       send(err)
-  //     })
+  const html = `<html>
+                  <body>
+                    <p>Testing Sending Emails with netlify functions using Sparkpost</p>
+                    <p>${name}</p>
+                    <p>${email}</p>
+                    <p>${message}</p>
+                  </body>
+                </html>`
 
-  // send(event.body)
+  const sendEmail = () => {
+    client.transmissions
+      .send({
+        options: {
+          sandbox: false
+        },
+        content: {
+          from: 'jalenparham@mail.jalenparham.com',
+          subject: 'Sending Emails',
+          html
+        },
+        recipients: [{ address: 'jalenparham97@gmail.com' }]
+      })
+      .then(() => {
+        send(true)
+      })
+      .catch(err => {
+        send(err)
+      })
+  }
 
-  console.log({ name, email, message })
+  if (event.httpMethod === 'POST') {
+    sendEmail()
+  }
 }
-
-// if (event.httpMethod === 'POST') {
-//   sendEmail()
-// }

@@ -93,26 +93,114 @@
       <section class="contact">
         <div class="contact-container">
           <img src="../assets/img/email.svg" alt="Let's get in touch" class="contact-img">
-          <form action class="contact-form">
+          <form class="contact-form" @submit.prevent="send">
             <h1 class="form-title">Let's Get In Touch</h1>
+            <div class="error-message" v-if="error !== '' && !msg">
+              <p>{{ error }}</p>
+              <span @click="clearErrMsg">
+                <i class="far fa-times-circle"></i>
+              </span>
+            </div>
             <div class="form">
-              <input type="text" class="form-control" placeholder="Name">
-              <input type="text" class="form-control" placeholder="Email">
-              <textarea type="text" rows="3" class="form-control" placeholder="Message"></textarea>
+              <div class="form-control">
+                <input type="text" class="form-input" placeholder="Full Name" v-model="form.name">
+              </div>
+              <div class="form-control">
+                <input
+                  type="email"
+                  class="form-input"
+                  placeholder="Email Address"
+                  v-model="form.email"
+                >
+              </div>
+              <div class="form-control">
+                <textarea
+                  type="text"
+                  rows="3"
+                  class="form-input"
+                  placeholder="Message..."
+                  v-model="form.message"
+                ></textarea>
+              </div>
               <button class="form-btn ripple" type="submit">Send</button>
             </div>
           </form>
         </div>
       </section>
+
+      <div id="snackbar" ref="snackbar">
+        <h4>Message Sent!</h4>
+        <h4>Thank You!</h4>
+      </div>
     </main>
   </section>
 </template>
 
 <script>
+import { sendEmail } from "../utils/utils";
+
 export default {
   data: () => ({
-    drawer: null
-  })
+    drawer: null,
+    form: {
+      name: "",
+      email: "",
+      message: ""
+    },
+    error: "",
+    msg: false
+  }),
+  methods: {
+    clearForm() {
+      this.form.name = "";
+      this.form.email = "";
+      this.form.message = "";
+    },
+    isEmailValid(email) {
+      const re = /\S+@\S+\.\S+/;
+      return re.test(email);
+    },
+    isFormValid({ name, email, message }) {
+      if (name !== "" && email !== "" && message !== "") {
+        if (this.isEmailValid(email)) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    },
+    send() {
+      if (this.isFormValid(this.form)) {
+        sendEmail(this.form)
+          .then(res => {
+            if (res.data) {
+              this.showSnackbar();
+              this.clearForm();
+            }
+          })
+          .catch(console.log());
+      } else {
+        this.msg = false;
+        this.error = "All fields are required to send a message";
+      }
+    },
+    clearErrMsg() {
+      this.msg = true;
+    },
+    showSnackbar() {
+      // Get the snackbar DIV
+      const snackbar = this.$refs.snackbar;
+      // Add the "show" class to DIV
+      snackbar.className = "show";
+      // After 3 seconds, remove the show class from DIV
+      setTimeout(
+        () => (snackbar.className = snackbar.className.replace("show", "")),
+        3000
+      );
+    }
+  }
 };
 </script>
 
@@ -390,11 +478,34 @@ main {
 }
 
 .form-control {
-  padding: 10px;
   margin-bottom: 20px;
+}
+
+.form-input {
+  padding: 10px;
   border: 1px solid #4c4981;
   border-radius: 5px;
   font-size: 1.1rem;
+  width: 100%;
+}
+
+.input-error {
+  border: 1px solid #e96060;
+}
+
+.error-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #f70909;
+  padding: 20px;
+  border: 1px solid #f70909;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.error-message span {
+  cursor: pointer;
 }
 
 .form-control:first-child {
@@ -415,6 +526,72 @@ main {
 .form-btn:hover {
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #34a853;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
 }
 
 /* Media Queries */
