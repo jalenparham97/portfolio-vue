@@ -10,12 +10,18 @@
       </div>
 
       <div class="form">
-        <form action class="contact-form">
+        <form class="contact-form" @submit.prevent="send">
           <h1 class="form-title">Let's Get In Touch</h1>
           <div class="form">
-            <input type="text" class="form-control" placeholder="Name">
-            <input type="text" class="form-control" placeholder="Email">
-            <textarea type="text" rows="3" class="form-control" placeholder="Message"></textarea>
+            <input type="text" class="form-control" placeholder="Name" v-model="form.name">
+            <input type="text" class="form-control" placeholder="Email" v-model="form.email">
+            <textarea
+              type="text"
+              rows="3"
+              class="form-control"
+              placeholder="Message"
+              v-model="form.message"
+            ></textarea>
             <button class="form-btn ripple" type="submit">Send</button>
           </div>
         </form>
@@ -25,7 +31,24 @@
 </template>
 
 <script>
-export default {};
+import { sendEmail } from "../utils/utils";
+
+export default {
+  data: () => ({
+    form: {
+      name: "",
+      email: "",
+      message: ""
+    }
+  }),
+  methods: {
+    send() {
+      sendEmail(this.form)
+        .then(res => console.log(res))
+        .catch(console.log());
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

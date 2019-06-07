@@ -59,7 +59,10 @@ export default {
     },
 
     isCurrentPage(page) {
-      page === this.currentPage ? "active" : "";
+      if (page === this.currentPage) {
+        return "active";
+      }
+      return "";
     }
   }
 };
