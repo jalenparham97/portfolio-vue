@@ -20,10 +20,17 @@
           </div>
           <div class="form">
             <div class="form-control">
-              <input type="text" class="form-input" placeholder="Full Name" v-model="form.name">
+              <input
+                autocomplete="off"
+                type="text"
+                class="form-input"
+                placeholder="Full Name"
+                v-model="form.name"
+              >
             </div>
             <div class="form-control">
               <input
+                autocomplete="off"
                 type="email"
                 class="form-input"
                 placeholder="Email Address"
@@ -46,8 +53,7 @@
     </div>
 
     <div id="snackbar" ref="snackbar">
-      <h4>Message Sent!</h4>
-      <h4>Thank You!</h4>
+      <h3>Message Sent! Thank You!</h3>
     </div>
   </div>
 </template>
@@ -95,7 +101,14 @@ export default {
               this.clearForm();
             }
           })
-          .catch(console.log());
+          .catch(err => {
+            if (err) {
+              this.clearForm();
+              this.msg = false;
+              this.error =
+                "Sorry were having server issues. Please try again later.";
+            }
+          });
       } else {
         this.msg = false;
         this.error = "All fields are required to send a message";

@@ -6,8 +6,8 @@
           <h1>Full Stack Web Developer</h1>
           <h3>I create Web Applications using the latest technologies the web has to offer.</h3>
           <div class="hero-actions">
-            <router-link class="action-btn ripple" to="/work">My Work</router-link>
-            <router-link class="action-btn ripple" to="/contact">Contact</router-link>
+            <a class="action-btn ripple" href="#work">My Work</a>
+            <button class="action-btn ripple" @click="go('/contact', 'Contact')">Contact</button>
           </div>
         </div>
 
@@ -47,44 +47,51 @@
         </div>
       </section>
 
-      <section class="work">
+      <section class="work" id="work">
         <h1>My Work</h1>
         <div class="work-contact">
           <h2>Like what you see?</h2>
-          <router-link class="ripple work-contact-btn" to="/contact">Let's Talk</router-link>
+          <button class="ripple work-contact-btn" @click="go('/contact', 'Contact')">Let's Talk</button>
         </div>
 
         <div class="work-container">
-          <div class="project border">
-            <img src="../assets/img/newscycle.jpg" alt="NewsCycle, get your news on a cycle">
-            <h3 class="title">NewsCycle</h3>
-            <p>A news application where users can Login and get up to date news, save articles to their personal feed, comment and like on news articles, and search for their favorite news outlets.</p>
-            <div class="card-action-btns">
-              <button class="card-action-btn ripple">Source Code</button>
-              <a
-                class="card-action-btn ripple"
-                href="https://newscycle.netlify.com"
-                target="_blank"
-              >Visit Site</a>
+          <div class="card">
+            <a href="https://newscycle.netlify.com" target="_blank">
+              <img src="../assets/img/newscycle.jpg" alt="NewsCycle, get your news on a cycle">
+            </a>
+            <div class="card-content">
+              <div class="title-header">
+                <h3 class="title">NewsCycle</h3>
+                <a href="https://github.com/jalenparham97/news-app" target="_blank">
+                  <i class="fab fa-github github-icon"></i>
+                </a>
+              </div>
+              <p>A news application where users can Login and get up to date news, save articles to their personal feed, comment and like on news articles, and search for their favorite news outlets.</p>
             </div>
           </div>
-          <div class="project border">
-            <img src="../assets/img/newscycle.jpg" alt="NewsCycle, get your news on a cycle">
-            <h3 class="title">NewsCycle</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia, ipsum id! Laborum similique veritatis eligendi.</p>
-            <div class="card-action-btns">
-              <button class="card-action-btn ripple">Source Code</button>
-              <button class="card-action-btn ripple">Visit Site</button>
+          <div class="card">
+            <a href="https://detroitlfg.com" target="_blank">
+              <img src="../assets/img/lfg.png" alt="NewsCycle, get your news on a cycle">
+            </a>
+            <div class="card-content">
+              <div class="title-header">
+                <h3 class="title">Detroit LFG</h3>
+              </div>
+              <p>A client website created to bring a large Gaming Community together through the love of playing Dungeons and Dragons.</p>
             </div>
           </div>
-          <div class="project border">
-            <img src="../assets/img/newscycle.jpg" alt="NewsCycle, get your news on a cycle">
-            <h3 class="title">NewsCycle</h3>
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia, ipsum id! Laborum similique veritatis eligendi.</p>
-
-            <div class="card-action-btns">
-              <button class="card-action-btn ripple">Source Code</button>
-              <button class="card-action-btn ripple">Visit Site</button>
+          <div class="card">
+            <a href="https://employee-manager-vue.netlify.com" target="_blank">
+              <img src="../assets/img/employee.png" alt="NewsCycle, get your news on a cycle">
+            </a>
+            <div class="card-content">
+              <div class="title-header">
+                <h3 class="title">Employee Manager</h3>
+                <a href="https://employee-manager-vue.netlify.com" target="_blank">
+                  <i class="fab fa-github github-icon"></i>
+                </a>
+              </div>
+              <p>An application where a user can add new employees and manage existing ones.</p>
             </div>
           </div>
         </div>
@@ -103,10 +110,17 @@
             </div>
             <div class="form">
               <div class="form-control">
-                <input type="text" class="form-input" placeholder="Full Name" v-model="form.name">
+                <input
+                  autocomplete="off"
+                  type="text"
+                  class="form-input"
+                  placeholder="Full Name"
+                  v-model="form.name"
+                >
               </div>
               <div class="form-control">
                 <input
+                  autocomplete="off"
                   type="email"
                   class="form-input"
                   placeholder="Email Address"
@@ -129,17 +143,17 @@
       </section>
 
       <div id="snackbar" ref="snackbar">
-        <h4>Message Sent!</h4>
-        <h4>Thank You!</h4>
+        <h3>Message Sent! Thank You!</h3>
       </div>
     </main>
   </section>
 </template>
 
 <script>
-import { sendEmail } from "../utils/utils";
+import { sendEmail, go, isCurrentPage } from "../utils/utils";
 
 export default {
+  props: ["go", "isCurrentPage"],
   data: () => ({
     drawer: null,
     form: {
@@ -180,7 +194,14 @@ export default {
               this.clearForm();
             }
           })
-          .catch(console.log());
+          .catch(err => {
+            if (err) {
+              this.clearForm();
+              this.msg = false;
+              this.error =
+                "Sorry were having server issues. Please try again later.";
+            }
+          });
       } else {
         this.msg = false;
         this.error = "All fields are required to send a message";
@@ -205,7 +226,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 /* Heading */
 .fullvh {
   height: 85vh;
@@ -394,56 +415,52 @@ main {
   grid-gap: 5em 1em;
 }
 
-.project {
-  width: 100%;
-  padding: 0px 10px;
+.card {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  }
 }
 
-.project img {
-  width: 100%;
+.card-content {
+  padding: 10px 20px 20px 20px;
 }
 
-.project h3 {
+.card img {
+  width: 100%;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom: 7px solid #6c63ff;
+}
+
+.card h3 {
   margin-top: 10px;
   font-size: 1.8rem;
   color: #4c4981;
 }
 
-.project p {
+.card p {
   width: 100%;
   margin-top: 20px;
   font-size: 1.2rem;
   color: #4c4981;
 }
 
-.card-action-btn {
+.title-header {
+  display: flex;
+  align-items: center;
+}
+
+.github-icon {
+  margin-top: 10px;
   margin-left: 20px;
-  background: #fff;
-  font-size: 1.2rem;
-  color: #4c4981;
-  padding: 0.3em 0.8em;
-  border: 1px solid #6c63ff;
-  border-radius: 20px;
-  transition: 0.3s;
+  font-size: 2rem;
   cursor: pointer;
-  outline: none;
-  float: right;
-}
-
-.card-action-btns {
-  margin-top: 20px;
-}
-
-.card-action-btn:hover {
-  background: #6c63ff;
-  color: #fff;
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
-}
-
-.border {
-  border-right: 1px solid #4c4881;
-  border-left: 1px solid #4c4881;
+  color: #000;
 }
 
 /* Contact Section */

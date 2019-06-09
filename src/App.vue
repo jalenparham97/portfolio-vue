@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navbar/>
-    <router-view/>
+    <Navbar :go="go" :isCurrentPage="isCurrentPage" :menu="menu"/>
+    <router-view :go="go" :isCurrentPage="isCurrentPage"/>
     <Footer/>
   </div>
 </template>
@@ -14,6 +14,29 @@ export default {
   components: {
     Navbar,
     Footer
+  },
+  data: () => ({
+    menu: [
+      { to: "/", page: "Home", icon: "fas fa-portrait" },
+      { to: "/about", page: "About", icon: "fas fa-portrait" },
+      // { to: "/work", page: "Work", icon: "fas fa-code" },
+      { to: "/contact", page: "Contact", icon: "fas fa-address-card" }
+    ],
+    currentPage: ""
+  }),
+  methods: {
+    go(to, page) {
+      this.$router.push(to);
+      this.currentPage = page;
+      // this.drawer = false;
+    },
+
+    isCurrentPage(page) {
+      if (page === this.currentPage) {
+        return "active";
+      }
+      return "";
+    }
   }
 };
 </script>

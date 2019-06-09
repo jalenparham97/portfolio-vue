@@ -8,6 +8,7 @@ exports.handler = (event, context, callback) => {
     'Access-Control-Allow-Headers':
       'Origin, X-Requested-With, Content-Type, Accept'
   }
+
   const send = body => {
     callback(null, {
       statusCode: 200,
@@ -33,7 +34,7 @@ exports.handler = (event, context, callback) => {
         },
         content: {
           from: 'jalenparham@mail.jalenparham.com',
-          subject: 'Sending Emails',
+          subject: `Message from my website`,
           html
         },
         recipients: [{ address: 'jalenparham97@gmail.com' }]

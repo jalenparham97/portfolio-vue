@@ -22,7 +22,7 @@
     </nav>
 
     <!-- Side Navigation -->
-    <vs-sidebar parent="body" color="primary" class="sidebarx" spacer v-model="drawer">
+    <!-- <vs-sidebar parent="body" color="primary" class="sidebarx" spacer v-model="drawer">
       <div class="header-sidebar" slot="header">
         <h4>Jalen Parham</h4>
       </div>
@@ -36,35 +36,13 @@
         <i :class="item.icon" class="icon"></i>
         {{ item.page }}
       </vs-sidebar-item>
-    </vs-sidebar>
+    </vs-sidebar>-->
   </section>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    menu: [
-      { to: "/about", page: "About", icon: "fas fa-portrait" },
-      { to: "/work", page: "Work", icon: "fas fa-code" },
-      { to: "/contact", page: "Contact", icon: "fas fa-address-card" }
-    ],
-    currentPage: "",
-    drawer: false
-  }),
-  methods: {
-    go(to, page) {
-      this.$router.push(to);
-      this.currentPage = page;
-      this.drawer = false;
-    },
-
-    isCurrentPage(page) {
-      if (page === this.currentPage) {
-        return "active";
-      }
-      return "";
-    }
-  }
+  props: ["currentPage", "isCurrentPage", "go", "menu"]
 };
 </script>
 
@@ -133,6 +111,22 @@ export default {
   color: #fff;
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  /* margin-right: 200px; */
+}
+
+.dropdown-content {
+  /* display: none; */
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
 }
 
 .active {
