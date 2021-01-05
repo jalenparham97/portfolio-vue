@@ -9,7 +9,7 @@
     "lambda-build": "netlify-lambda build functions"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "core-js": "^2.6.5",
     "moment": "^2.24.0",
     "netlify-lambda": "^1.4.3",
